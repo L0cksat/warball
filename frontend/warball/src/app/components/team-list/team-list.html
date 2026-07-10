@@ -1,0 +1,9 @@
+<header class="text-center mt-5">
+    <h2>TEAMS</h2>
+</header>
+
+<div class="mt-5 text-center">
+    @for (team of (teams$ | async) ?? []; track team.id) {
+        <p>{{ team.id }} - {{ team.teamName }}</p>
+    }
+</div>

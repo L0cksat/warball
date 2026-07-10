@@ -1,0 +1,19 @@
+# Secrets & local environment
+.env
+.env.*
+!.env.example
+
+# Spring Boot local overrides (passwords, ports, etc.)
+**/application-local.properties
+**/application-local.yml
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
