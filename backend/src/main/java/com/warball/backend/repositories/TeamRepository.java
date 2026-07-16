@@ -6,4 +6,5 @@ import com.warball.backend.entities.Team;
 
 public interface TeamRepository extends JpaRepository<Team, Long>{
     
+    
 }

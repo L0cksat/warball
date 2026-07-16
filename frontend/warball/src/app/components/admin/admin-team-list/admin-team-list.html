@@ -1,0 +1,10 @@
+<div class="text-center">
+    <h1>Admin - Teams</h1>
+</div>
+<div class="text-center">
+    <button class="rounded px-4 py-2 bg-[#94a644]"><a routerLink="/admin/teams/new">Add New Team</a></button>
+    @for (team of (teams$ | async) ?? []; track team.id) {
+        <p class="mb-6">{{ team.id }} - {{ team.teamName }} - {{ team.country }} <button class="rounded px-4 py-2 bg-[#1a9fff]"><a routerLink="/admin/teams/{{ team.id }}/edit">Edit Team</a></button></p>
+    }
+</div>
+
