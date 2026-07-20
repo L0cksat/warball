@@ -4,7 +4,7 @@
 <div class="text-center">
     <button class="rounded px-4 py-2 bg-[#94a644]"><a routerLink="/admin/teams/new">Add New Team</a></button>
     @for (team of (teams$ | async) ?? []; track team.id) {
-        <p class="mb-6">{{ team.id }} - {{ team.teamName }} - {{ team.country }} <button class="rounded px-4 py-2 bg-[#1a9fff]"><a routerLink="/admin/teams/{{ team.id }}/edit">Edit Team</a></button></p>
+        <p class="mb-6">{{ team.id }} - {{ team.teamName }} - {{ team.country }} <button class="rounded px-4 py-2 bg-[#1a9fff] mt-4 mr-4"><a routerLink="/admin/teams/{{ team.id }}/edit">Edit Team</a></button><button class="rounded px-4 py-2 bg-[#e67657]"><a routerLink="/admin/teams/{{ team.id }}/players">Go to Roster</a></button></p>
     }
 </div>
 

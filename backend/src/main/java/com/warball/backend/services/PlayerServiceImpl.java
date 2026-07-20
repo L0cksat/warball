@@ -27,6 +27,7 @@ public class PlayerServiceImpl implements PlayerService{
           existing.setPlayerId(player.getPlayerId());
           existing.setFirstName(player.getFirstName());
           existing.setLastName(player.getLastName());
+          existing.setAge(player.getAge());
           existing.setTeam(player.getTeam());
           existing.setRace(player.getRace());
           existing.setSubRace(player.getSubRace());

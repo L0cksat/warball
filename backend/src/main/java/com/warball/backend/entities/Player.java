@@ -38,6 +38,9 @@ public class Player {
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @Column(name = "AGE")
+    private Integer age;
+
     @Column(name = "RACE")
     private String race;
 
