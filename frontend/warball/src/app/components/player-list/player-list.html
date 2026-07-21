@@ -1,0 +1,11 @@
+<div class="text-center">
+    <h1>Players - {{ (team$ | async)?.teamName }}</h1>
+</div>
+<div class="text-center">
+    @for(player of (players$ | async ) ?? []; track player.id){
+        <p class="mb-6">{{player.id}} - {{player.playerId}} - {{ player.firstName }} - {{ player.lastName }} - {{ player.age }} - {{ player.race }} - {{ player.subRace }} - {{ player.position }} - Physical Attributes: Heft: {{ player.attributes.physicalAttributes.heft }}</p>
+    }
+    @empty {
+        There are no players on this team...
+    }
+</div>

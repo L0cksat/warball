@@ -1,1 +1,28 @@
-<p>admin-player-form works!</p>
+<div class="text-center">
+    <h1>{{ playerId ? 'Edit Player' : 'Create Player' }}</h1>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>Player ID: </label>
+    <input type="text" formControlName="playerId" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
+
+    <label>First Name: </label>
+    <input type="text" formControlName="firstName" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
+
+    <label>Last Name: </label>
+    <input type="text" formControlName="lastName" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
+
+    <label>Race: </label>
+    <input type="text" formControlName="race" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
+
+    <label>Sub race: </label>
+    <input type="text" formControlName="subRace" class="bg-neutral-500 text-white rounded-md mr-7 px-4"/>
+
+    <label>Age: </label>
+    <input type="number" formControlName="age" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
+
+    <label>Position: </label>
+    <input type="text" formControlName="position" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
+
+    <button type="submit" [disabled]="form.invalid" class="rounded px-4 py-2 bg-[#94a644] ml-6 mr-6">Save</button>
+    <button type="button" [routerLink]="['/admin/teams/', teamId, '/players']" class="rounded px-4 py-2 bg-[#a00606] text-white">Cancel</button>
+</form>
