@@ -29,6 +29,8 @@ export class AdminPlayerFormComponent implements OnInit{
     subRace: [''],
     age: [null as number | null],
     position: ['', Validators.required],
+    hobbies: [''],
+    shirtNumber: [null as number | null],
   })
 
   private emptyAttributes(): PlayerAttributes{
@@ -80,6 +82,8 @@ export class AdminPlayerFormComponent implements OnInit{
             subRace: player.subRace,
             age: player.age,
             position: player.position,
+            hobbies: player.hobbies?.join(', ') ?? '',
+            shirtNumber: player.shirtNumber,
         })
       },
       error: () => {
@@ -107,6 +111,11 @@ export class AdminPlayerFormComponent implements OnInit{
       attributes: this.loadedPlayer?.attributes ?? this.emptyAttributes(),
       traits: this.loadedPlayer?.traits ?? [],
       statusEffects: this.loadedPlayer?.statusEffects ?? [],
+      hobbies: (this.form.value.hobbies ?? '')
+                .split(',')
+                .map( h => h.trim())
+                .filter(h => h.length > 0),
+      shirtNumber: this.form.value.shirtNumber!,
     }
 
     if (this.playerId){

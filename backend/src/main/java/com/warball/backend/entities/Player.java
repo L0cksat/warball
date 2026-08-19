@@ -17,11 +17,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "players")
+@Table(name = "players" , uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"TEAM_ID", "SHIRT_NUMBER"})})
 public class Player {
 
     @Id
@@ -65,5 +67,12 @@ public class Player {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "STATUS_EFFECTS")
     private List<StatusEffect> statusEffects;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "HOBBIES")
+    private List<String> hobbies;
+
+    @Column(name = "SHIRT_NUMBER")
+    private Integer shirtNumber;
     
 }

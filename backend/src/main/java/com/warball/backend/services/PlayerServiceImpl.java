@@ -35,6 +35,8 @@ public class PlayerServiceImpl implements PlayerService{
           existing.setAttributes(player.getAttributes());
           existing.setTraits(player.getTraits());
           existing.setStatusEffects(player.getStatusEffects());
+          existing.setHobbies(player.getHobbies());
+          existing.setShirtNumber(player.getShirtNumber());
           return playerRepository.save(existing);
         });
     }

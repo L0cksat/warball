@@ -22,7 +22,11 @@ private route = inject(ActivatedRoute)
   form = this.fb.group({
     teamName: ['', Validators.required],
     country: [''],
-    province: ['']
+    province: [''],
+    homePrimaryHex: [''],
+    homeSecondaryHex: [''],
+    awayPrimaryHex: [''],
+    awaySecondaryHex: ['']
   })
 
   ngOnInit(): void {
@@ -34,7 +38,11 @@ private route = inject(ActivatedRoute)
             this.form.patchValue({
               teamName: team.teamName,
               country: team.country,
-              province: team.province ?? ''
+              province: team.province ?? '',
+              homePrimaryHex: team.homePrimaryHex ?? '',
+              homeSecondaryHex: team.homeSecondaryHex ?? '',
+              awayPrimaryHex: team.awayPrimaryHex ?? '',
+              awaySecondaryHex: team.awaySecondaryHex ?? ''
             })
           },
           error: () => {
@@ -54,6 +62,10 @@ private route = inject(ActivatedRoute)
       teamName: this.form.value.teamName!,
       country: this.form.value.country!,
       province: this.form.value.province || null,
+      homePrimaryHex: this.form.value.homePrimaryHex || null,
+      homeSecondaryHex: this.form.value.homeSecondaryHex || null,
+      awayPrimaryHex: this.form.value.awayPrimaryHex || null,
+      awaySecondaryHex: this.form.value.awaySecondaryHex || null,
     }
 
     if(this.teamId) {

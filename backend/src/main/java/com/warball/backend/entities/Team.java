@@ -27,4 +27,16 @@ public class Team {
 	@Column(name = "PROVINCE")
 	private String province;
 
+	@Column(name = "HOME_PRIMARY_HEX")
+	private String homePrimaryHex;
+
+	@Column(name = "HOME_SECONDARY_HEX")
+	private String homeSecondaryHex;
+
+	@Column(name = "AWAY_PRIMARY_HEX")
+	private String awayPrimaryHex;
+
+	@Column(name = "AWAY_SECONDARY_HEX")
+	private String awaySecondaryHex;
+
 }

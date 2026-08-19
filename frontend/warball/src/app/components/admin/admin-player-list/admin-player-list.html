@@ -5,7 +5,7 @@
     <button class="rounded px-4 py-2 bg-[#94a644] mr-4"><a routerLink="/admin/teams/{{ teamId }}/players/new">Add New Player</a></button>
     <button class="rounded px-4 py-2 bg-[#cca700]"><a routerLink="/admin/teams">Back to Teams</a></button>
     @for(player of (players$ | async ) ?? []; track player.id){
-        <p class="mb-6">{{player.id}} - {{player.playerId}} - {{ player.firstName }} - {{ player.lastName }} - {{ player.age }} - {{ player.race }} - {{ player.subRace }} - {{ player.position }} - Physical Attributes: Heft: {{ player.attributes.physicalAttributes.heft }}</p><button class="rounded px-4 py-2 bg-[#1a9fff] mt-4 mr-4"><a routerLink="/admin/teams/{{ teamId }}/players/{{ player.id }}/edit">Edit Player</a></button>  
+        <p class="mb-6">{{player.id}} - {{player.playerId}} - {{ player.firstName }} - {{ player.lastName }} - {{ player.age }} - {{ player.race }} - {{ player.subRace }} - {{ player.position }} - Physical Attributes: Heft: {{ player.attributes.physicalAttributes.heft }} - Hobbies: {{player.hobbies}} - Shirt Number: #{{player.shirtNumber}}</p><button class="rounded px-4 py-2 bg-[#1a9fff] mt-4 mr-4"><a routerLink="/admin/teams/{{ teamId }}/players/{{ player.id }}/edit">Edit Player</a></button>  
     } @empty {
         There are no players on this team...
     }

@@ -12,6 +12,18 @@
     <label>Province: </label>
     <input type="text" formControlName="province" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
 
-    <button type="submit" [disabled]="form.invalid" class="rounded px-4 py-2 bg-[#94a644] ml-6 mr-6">Save</button>
+    <label>Home Primary Color: </label>
+    <input type="color" formControlName="homePrimaryHex" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
+
+    <label>Home Secondary Color: </label>
+    <input type="color" formControlName="homeSecondaryHex" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
+
+    <label>Away Primary Color: </label>
+    <input type="color" formControlName="awayPrimaryHex" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
+
+    <label>Away Secondary Color: </label>
+    <input type="color" formControlName="awaySecondaryHex" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
+
+    <button type="submit" [disabled]="form.invalid" class="rounded px-4 py-2 bg-[#94a644] ml-6 mr-6 mt-6">Save</button>
     <button type="button" routerLink="/admin/teams" class="rounded px-4 py-2 bg-[#a00606] text-white">Cancel</button>
 </form>

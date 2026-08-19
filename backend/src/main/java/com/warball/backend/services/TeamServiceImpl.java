@@ -29,6 +29,10 @@ public class TeamServiceImpl implements TeamService{
                     existing.setTeamName(team.getTeamName());
                     existing.setCountry(team.getCountry());
                     existing.setProvince(team.getProvince());
+                    existing.setHomePrimaryHex(team.getHomePrimaryHex());
+                    existing.setHomeSecondaryHex(team.getHomeSecondaryHex());
+                    existing.setAwayPrimaryHex(team.getAwayPrimaryHex());
+                    existing.setAwaySecondaryHex(team.getAwaySecondaryHex());
                     return teamRepo.save(existing);
                 });
     }

@@ -57,4 +57,6 @@ export interface Player {
   attributes: PlayerAttributes;
   traits: Trait[];
   statusEffects: StatusEffect[];
+  hobbies: string[];
+  shirtNumber: number | null;
 }

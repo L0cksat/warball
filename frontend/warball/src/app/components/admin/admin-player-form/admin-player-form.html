@@ -23,6 +23,12 @@
     <label>Position: </label>
     <input type="text" formControlName="position" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
 
+    <label>Hobbies: </label>
+    <input type="text" formControlName="hobbies" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
+
+    <label>Shirt Number: </label>
+    <input type="number" formControlName="shirtNumber" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
+
     <button type="submit" [disabled]="form.invalid" class="rounded px-4 py-2 bg-[#94a644] ml-6 mr-6">Save</button>
     <button type="button" [routerLink]="['/admin/teams/', teamId, '/players']" class="rounded px-4 py-2 bg-[#a00606] text-white">Cancel</button>
 </form>
