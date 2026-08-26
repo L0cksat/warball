@@ -4,6 +4,6 @@
 
 <div class="mt-5 text-center">
     @for (team of (teams$ | async) ?? []; track team.id) {
-        <a routerLink="/teams/{{ team.id }}/players" class="hover:opacity-50"><p>{{ team.id }} - {{ team.teamName }}</p></a>
+        <a routerLink="/teams/{{ team.id }}/players" class="hover:opacity-50"><p>{{ team.id }} - {{ team.teamName }} - {{ team.country }} <span class="inline-block w-4 h-4 align-middle ml-2" [style.background-color]="team.homePrimaryHex"></span> <span class="inline-block w-4 h-4 align-middle ml-1" [style.background-color]="team.homeSecondaryHex"></span></p></a>
     }
 </div>

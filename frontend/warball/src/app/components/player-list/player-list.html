@@ -3,7 +3,7 @@
 </div>
 <div class="text-center">
     @for(player of (players$ | async ) ?? []; track player.id){
-        <p class="mb-6">{{player.id}} - {{player.playerId}} - {{ player.firstName }} - {{ player.lastName }} - {{ player.age }} - {{ player.race }} - {{ player.subRace }} - {{ player.position }} - Physical Attributes: Heft: {{ player.attributes.physicalAttributes.heft }} - Hobbies: {{player.hobbies}} - Shirt Number: #{{player.shirtNumber}}</p>
+        <p class="mb-6">{{player.id}} - {{player.playerId}} - #{{player.shirtNumber}} - {{ player.firstName }} - {{ player.lastName }} - {{ player.age }} - {{ player.race }} - {{ player.subRace }} - {{ player.position }} - Physical Attributes: Heft: {{ player.attributes.physicalAttributes.heft }} - Hobbies: {{player.hobbies}}</p>
     }
     @empty {
         There are no players on this team...

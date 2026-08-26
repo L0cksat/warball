@@ -1,4 +1,5 @@
 package com.warball.backend.controllers;
+import com.warball.backend.services.PlayerGeneratorService;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.warball.backend.entities.Player;
 import com.warball.backend.entities.Team;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,14 +28,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/api/v1")
 public class TeamRestController {
     
+    private final PlayerGeneratorService playerGeneratorService;
     private final TeamRepository teamRepo;
     private final TeamService teamService;
     private final PlayerRepository playerRepository;
 
-    public TeamRestController(TeamRepository teamRepo, TeamService teamService, PlayerRepository playerRepository){
+    public TeamRestController(TeamRepository teamRepo, TeamService teamService, PlayerRepository playerRepository, PlayerGeneratorService playerGeneratorService){
         this.teamRepo = teamRepo;
         this.teamService = teamService;
         this.playerRepository = playerRepository;
+        this.playerGeneratorService = playerGeneratorService;
     }
 
 
@@ -61,6 +64,13 @@ public class TeamRestController {
     @PostMapping("/teams")
     public ResponseEntity<Team> createTeam(@RequestBody Team team)  {
         return new ResponseEntity<>(teamService.createTeam(team), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/teams/{teamId}/players/generate")
+    public ResponseEntity<Player> generatePlayer(@PathVariable Long teamId){
+        return new ResponseEntity<>(
+            playerGeneratorService.generateForTeam(teamId), HttpStatus.CREATED
+        );
     }
 
     @PutMapping("/teams/{id}")
