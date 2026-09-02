@@ -1,0 +1,111 @@
+.player-details {
+  width: 100%;
+}
+
+.player-card {
+  width: min(420px, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem 1rem 1.25rem;
+  background: rgba(8, 8, 8, 0.92);
+  border: 2px solid var(--wb-gold);
+  border-radius: 22px;
+}
+
+.player-card__portrait {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  border: 2px dashed var(--wb-gold-dim);
+  border-radius: var(--wb-radius);
+  background:
+    linear-gradient(180deg, rgba(255, 190, 0, 0.08), rgba(5, 5, 5, 0.4)),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 12px,
+      rgba(255, 190, 0, 0.06) 12px,
+      rgba(255, 190, 0, 0.06) 13px
+    );
+}
+
+.player-card__portrait p {
+  margin: 0;
+  font-family: var(--wb-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--wb-muted);
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.player-card__name {
+  text-align: center;
+  font-size: 1.55rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--wb-border);
+  border-radius: var(--wb-radius);
+  background: var(--wb-bg-panel);
+}
+
+.player-card__panel,
+.player-card__skills {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--wb-border);
+  border-radius: var(--wb-radius);
+  background: var(--wb-bg-panel);
+}
+
+.player-card__panel h2,
+.player-card__skills > h2,
+.player-card__attr h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.65rem;
+  text-align: center;
+}
+
+.player-card__panel p,
+.player-card__attr p {
+  margin: 0.28rem 0;
+  font-size: 0.95rem;
+}
+
+.player-card__id p {
+  font-family: var(--wb-font-mono);
+  text-align: center;
+}
+
+.player-card__hobbies ul,
+.player-card__traits ul,
+.player-card__status ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.player-card__hobbies li,
+.player-card__traits li,
+.player-card__status li {
+  margin: 0.2rem 0;
+}
+
+.player-card__skills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.player-card__attr {
+  padding: 0.7rem 0.75rem;
+  border: 1px solid var(--wb-border);
+  border-radius: 12px;
+  background: rgba(17, 17, 17, 0.9);
+}
+
+.player-card__attr h3 {
+  color: var(--wb-cream);
+  font-size: 0.82rem;
+}

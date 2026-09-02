@@ -6,11 +6,13 @@ import { AdminTeamFormComponent } from './components/admin/admin-team-form/admin
 import { AdminPlayerListComponent } from './components/admin/admin-player-list/admin-player-list';
 import { AdminPlayerFormComponent } from './components/admin/admin-player-form/admin-player-form';
 import { PlayerListComponent } from './components/player-list/player-list';
+import { PlayerDetailsComponent } from './components/player-details/player-details';
 
 export const routes: Routes = [
     { path: "", component: HomeComponent, pathMatch: 'full'},
     { path: "teams", component: TeamListComponent },
     { path: 'teams/:id/players', component: PlayerListComponent },
+    { path: "teams/:id/players/:playerId/details", component: PlayerDetailsComponent },
     { path: 'admin/teams', component: AdminTeamListComponent },
     { path: 'admin/teams/new', component: AdminTeamFormComponent },
     { path: 'admin/teams/:id/edit', component: AdminTeamFormComponent },

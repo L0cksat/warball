@@ -1,11 +1,14 @@
-<div class="text-center">
-    <h1>Players - {{ (team$ | async)?.teamName }}</h1>
-</div>
-<div class="text-center">
-    @for(player of (players$ | async ) ?? []; track player.id){
-        <p class="mb-6">{{player.id}} - {{player.playerId}} - #{{player.shirtNumber}} - {{ player.firstName }} - {{ player.lastName }} - {{ player.age }} - {{ player.race }} - {{ player.subRace }} - {{ player.position }} - Physical Attributes: Heft: {{ player.attributes.physicalAttributes.heft }} - Hobbies: {{player.hobbies}}</p>
+<div class="wb-page">
+  <h1 class="wb-title">Players — {{ (team$ | async)?.teamName }}</h1>
+  <p class="wb-kicker">The lineup</p>
+
+  <div class="wb-list">
+    @for (player of (players$ | async) ?? []; track player.id) {
+      <a class="wb-row" [routerLink]="['/teams', teamId, 'players', player.id, 'details']">
+        <p>#{{ player.shirtNumber }} — {{ player.firstName }} {{ player.lastName }} — {{ player.position }}</p>
+      </a>
+    } @empty {
+      <p class="wb-empty">There are no players on this team...</p>
     }
-    @empty {
-        There are no players on this team...
-    }
+  </div>
 </div>

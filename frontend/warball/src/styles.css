@@ -1,3 +1,307 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+
+:root {
+  --wb-bg: #050505;
+  --wb-bg-raised: #111111;
+  --wb-bg-panel: #0c0c0c;
+  --wb-gold: #ffbe00;
+  --wb-gold-dim: #c49200;
+  --wb-cream: #f4e6c3;
+  --wb-muted: #9a8a62;
+  --wb-red: #c41e3a;
+  --wb-ink: #050505;
+  --wb-border: rgba(255, 190, 0, 0.55);
+  --wb-font-display: 'Oswald', 'Arial Narrow', sans-serif;
+  --wb-font-body: 'Lora', Georgia, serif;
+  --wb-font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  --wb-radius: 14px;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--wb-cream);
+  font-family: var(--wb-font-body);
+  background-color: var(--wb-bg);
+  background-image:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 190, 0, 0.16), transparent 52%),
+    radial-gradient(ellipse at 80% 110%, rgba(196, 30, 58, 0.08), transparent 45%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 28px,
+      rgba(255, 190, 0, 0.035) 28px,
+      rgba(255, 190, 0, 0.035) 29px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 28px,
+      rgba(255, 190, 0, 0.025) 28px,
+      rgba(255, 190, 0, 0.025) 29px
+    );
+  background-attachment: fixed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--wb-font-display);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wb-gold);
+  margin: 0;
+}
+
+.wb-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.wb-main {
+  flex: 1;
+  width: min(1100px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1.5rem 0 4rem;
+}
+
+.wb-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.wb-title {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  text-align: center;
+}
+
+.wb-kicker {
+  font-family: var(--wb-font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--wb-muted);
+  margin: 0;
+}
+
+.wb-btn {
+  display: inline-block;
+  font-family: var(--wb-font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.1rem;
+  border: 2px solid var(--wb-gold);
+  background: var(--wb-gold);
+  color: var(--wb-ink);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.wb-btn:hover {
+  transform: translateY(-1px);
+  background: var(--wb-cream);
+  border-color: var(--wb-cream);
+}
+
+.wb-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.wb-btn--ghost {
+  background: transparent;
+  color: var(--wb-gold);
+}
+
+.wb-btn--ghost:hover {
+  background: var(--wb-gold);
+  color: var(--wb-ink);
+  border-color: var(--wb-gold);
+}
+
+.wb-btn--danger {
+  background: var(--wb-red);
+  border-color: var(--wb-red);
+  color: #fff;
+}
+
+.wb-btn--danger:hover {
+  background: #e03a54;
+  border-color: #e03a54;
+  color: #fff;
+}
+
+.wb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.wb-list {
+  width: min(720px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wb-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: rgba(12, 12, 12, 0.86);
+  border: 1px solid var(--wb-border);
+  border-radius: var(--wb-radius);
+}
+
+.wb-row:hover {
+  border-color: var(--wb-gold);
+}
+
+.wb-row p {
+  margin: 0;
+}
+
+.wb-swatch {
+  display: inline-block;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 1px solid var(--wb-cream);
+  vertical-align: middle;
+  margin-left: 0.35rem;
+}
+
+.wb-empty {
+  color: var(--wb-muted);
+  font-style: italic;
+  text-align: center;
+}
+
+.wb-admin .wb-title {
+  color: var(--wb-gold);
+}
+
+.wb-admin-banner {
+  font-family: var(--wb-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wb-red);
+  border: 1px solid var(--wb-red);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  margin: 0;
+}
+
+.wb-form {
+  width: min(640px, 100%);
+  display: grid;
+  gap: 0.9rem;
+  padding: 1.25rem;
+  background: rgba(12, 12, 12, 0.9);
+  border: 1px solid var(--wb-border);
+  border-radius: var(--wb-radius);
+}
+
+.wb-form label {
+  display: block;
+  font-family: var(--wb-font-display);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--wb-gold);
+  margin-bottom: 0.3rem;
+}
+
+.wb-form input[type='text'],
+.wb-form input[type='number'] {
+  width: 100%;
+  box-sizing: border-box;
+  background: #1a1a1a;
+  color: var(--wb-cream);
+  border: 1px solid var(--wb-border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--wb-font-mono);
+}
+
+.wb-form input[type='color'] {
+  width: 4rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--wb-gold);
+  background: transparent;
+  cursor: pointer;
+}
+
+.wb-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+@keyframes wb-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-1.4rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.wb-page p,
+.wb-page li {
+  animation: wb-slide-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.wb-page p:nth-of-type(1),
+.wb-page li:nth-of-type(1) { animation-delay: 0.04s; }
+.wb-page p:nth-of-type(2),
+.wb-page li:nth-of-type(2) { animation-delay: 0.08s; }
+.wb-page p:nth-of-type(3),
+.wb-page li:nth-of-type(3) { animation-delay: 0.12s; }
+.wb-page p:nth-of-type(4),
+.wb-page li:nth-of-type(4) { animation-delay: 0.16s; }
+.wb-page p:nth-of-type(5),
+.wb-page li:nth-of-type(5) { animation-delay: 0.2s; }
+.wb-page p:nth-of-type(6),
+.wb-page li:nth-of-type(6) { animation-delay: 0.24s; }
+.wb-page p:nth-of-type(7),
+.wb-page li:nth-of-type(7) { animation-delay: 0.28s; }
+.wb-page p:nth-of-type(8),
+.wb-page li:nth-of-type(8) { animation-delay: 0.32s; }
+.wb-page p:nth-of-type(9),
+.wb-page li:nth-of-type(9) { animation-delay: 0.36s; }
+.wb-page p:nth-of-type(10),
+.wb-page li:nth-of-type(10) { animation-delay: 0.4s; }
+.wb-page p:nth-of-type(n + 11),
+.wb-page li:nth-of-type(n + 11) { animation-delay: 0.44s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-page p,
+  .wb-page li {
+    animation: none;
+  }
+}

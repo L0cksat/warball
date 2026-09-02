@@ -1,0 +1,104 @@
+<div class="wb-page player-details">
+  <a class="wb-btn wb-btn--ghost" [routerLink]="['/teams', teamId, 'players']">Back to roster</a>
+
+  @if (player$ | async; as player) {
+    <article class="player-card">
+      <div class="player-card__portrait">
+        <p>Future generate player image</p>
+      </div>
+
+      <h2 class="player-card__name">{{ player.firstName }} {{ player.lastName }}</h2>
+
+      <section class="player-card__panel player-card__id">
+        <h2>Player ID</h2>
+        <p>ID: {{ player.id }}</p>
+        <p>{{ player.playerId }}</p>
+      </section>
+
+      <section class="player-card__panel">
+        <h2>Details</h2>
+        <p>First name: {{ player.firstName }}</p>
+        <p>Last name: {{ player.lastName }}</p>
+        <p>Age: {{ player.age }}</p>
+        <p>Race: {{ player.race }}</p>
+        <p>Subrace: {{ player.subRace }}</p>
+        <p>Position: {{ player.position }}</p>
+        <p>Shirt number: #{{ player.shirtNumber }}</p>
+        <p>Team: {{ player.team?.teamName }}</p>
+      </section>
+
+      <section class="player-card__panel player-card__hobbies">
+        <h2>Hobbies</h2>
+        <ul>
+          @for (hobby of player.hobbies ?? []; track hobby) {
+            <li>{{ hobby }}</li>
+          } @empty {
+            <li>This player has no hobbies...</li>
+          }
+        </ul>
+      </section>
+
+      <section class="player-card__skills">
+        <h2>Skills</h2>
+
+        @if (player.attributes; as attributes) {
+          <div class="player-card__attr">
+            <h3>Physical attributes</h3>
+            <p>Heft: {{ attributes.physicalAttributes.heft }}</p>
+            <p>Slipperiness: {{ attributes.physicalAttributes.slipperiness }}</p>
+            <p>Sticky fingers: {{ attributes.physicalAttributes.stickyFingers }}</p>
+            <p>Paranoia: {{ attributes.physicalAttributes.paranoia }}</p>
+            <p>Bulwark: {{ attributes.physicalAttributes.bulwark }}</p>
+          </div>
+
+          <div class="player-card__attr">
+            <h3>Technical attributes</h3>
+            <p>Siege: {{ attributes.technicalAttributes.siege }}</p>
+            <p>Trajectory: {{ attributes.technicalAttributes.trajectory }}</p>
+            <p>Threading: {{ attributes.technicalAttributes.threading }}</p>
+            <p>Magnetism: {{ attributes.technicalAttributes.magnetism }}</p>
+            <p>Castle thirst: {{ attributes.technicalAttributes.castleThirst }}</p>
+          </div>
+
+          <div class="player-card__attr">
+            <h3>Mystical attributes</h3>
+            <p>Arcane spark: {{ attributes.mysticalAttributes.arcaneSpark }}</p>
+            <p>Ward: {{ attributes.mysticalAttributes.ward }}</p>
+            <p>Restraint: {{ attributes.mysticalAttributes.restraint }}</p>
+          </div>
+
+          <div class="player-card__attr">
+            <h3>Vibe attributes</h3>
+            <p>Trash talk: {{ attributes.vibeAttributes.trashTalk }}</p>
+            <p>Moxie: {{ attributes.vibeAttributes.moxie }}</p>
+            <p>Dramatic flair: {{ attributes.vibeAttributes.dramaticFlair }}</p>
+          </div>
+        } @else {
+          <p>Skills have not been generated for this player yet.</p>
+        }
+      </section>
+
+      <section class="player-card__panel player-card__traits">
+        <h2>Traits</h2>
+        <ul>
+          @for (trait of player.traits ?? []; track trait.traitId) {
+            <li>{{ trait.name }} ({{ trait.type }})</li>
+          } @empty {
+            <li>This player has no traits...</li>
+          }
+        </ul>
+      </section>
+
+      <section class="player-card__panel player-card__status">
+        <h2>Status effects</h2>
+        <ul>
+          @for (statusEffect of player.statusEffects ?? []; track $index) {
+            <li>{{ $index + 1 }}</li>
+          } @empty {
+            <li>This player has no active status effects...</li>
+          }
+        </ul>
+      </section>
+    </article>
+  }
+</div>

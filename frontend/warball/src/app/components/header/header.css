@@ -1,0 +1,29 @@
+.wb-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.4rem 1rem 1.1rem;
+  border-bottom: 2px solid var(--wb-gold);
+  background: rgba(5, 5, 5, 0.92);
+}
+
+.wb-header__mark {
+  font-family: var(--wb-font-display);
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wb-gold);
+  line-height: 1;
+}
+
+.wb-header__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

@@ -1,11 +1,10 @@
-<div class="text-center">
-    <h1 class="bg-danger">WARBALL</h1>
-    <nav>
-        <ul class="flex justify-center gap-7">
-            <li><button type="button" class="rounded px-4 py-2 bg-[#94a644]"><a routerLink="/">Home</a></button></li>
-            <li><button type="button" class="rounded px-4 py-2 bg-[#1a9fff]"><a routerLink="/teams">Teams</a></button></li>
-            <li><button type="button" class="rounded px-4 py-2 bg-black text-white"><a routerLink="/admin/teams">Admin Mode</a></button></li>
-        </ul>
-    </nav>
-</div>
-
+<header class="wb-header">
+  <a routerLink="/" class="wb-header__mark">Warball</a>
+  <nav>
+    <ul class="wb-header__nav">
+      <li><a routerLink="/" class="wb-btn wb-btn--ghost">Home</a></li>
+      <li><a routerLink="/teams" class="wb-btn">Teams</a></li>
+      <li><a routerLink="/admin/teams" class="wb-btn wb-btn--danger">Admin Mode</a></li>
+    </ul>
+  </nav>
+</header>

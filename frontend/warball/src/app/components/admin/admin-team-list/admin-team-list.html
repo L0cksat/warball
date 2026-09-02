@@ -1,10 +1,22 @@
-<div class="text-center">
-    <h1>Admin - Teams</h1>
-</div>
-<div class="text-center">
-    <button class="rounded px-4 py-2 bg-[#94a644]"><a routerLink="/admin/teams/new">Add New Team</a></button>
-    @for (team of (teams$ | async) ?? []; track team.id) {
-        <p class="mb-6">{{ team.id }} - {{ team.teamName }} - {{ team.country }} <button class="rounded px-4 py-2 bg-[#1a9fff] mt-4 mr-4"><a routerLink="/admin/teams/{{ team.id }}/edit">Edit Team</a></button><button class="rounded px-4 py-2 bg-[#e67657]"><a routerLink="/admin/teams/{{ team.id }}/players">Go to Roster</a></button></p>
-    }
-</div>
+<div class="wb-page wb-admin">
+  <p class="wb-admin-banner">Commissioner's office</p>
+  <h1 class="wb-title">Admin — Teams</h1>
 
+  <div class="wb-actions">
+    <a class="wb-btn" routerLink="/admin/teams/new">Add new team</a>
+  </div>
+
+  <div class="wb-list">
+    @for (team of (teams$ | async) ?? []; track team.id) {
+      <div class="wb-row">
+        <p>{{ team.id }} — {{ team.teamName }} — {{ team.country }}</p>
+        <div class="wb-actions">
+          <a class="wb-btn wb-btn--ghost" [routerLink]="['/admin/teams', team.id, 'edit']">Edit team</a>
+          <a class="wb-btn" [routerLink]="['/admin/teams', team.id, 'players']">Go to roster</a>
+        </div>
+      </div>
+    } @empty {
+      <p class="wb-empty">No teams yet.</p>
+    }
+  </div>
+</div>

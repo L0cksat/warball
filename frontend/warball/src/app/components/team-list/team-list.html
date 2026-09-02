@@ -1,9 +1,18 @@
-<header class="text-center mt-5">
-    <h2>TEAMS</h2>
-</header>
+<div class="wb-page">
+  <h2 class="wb-title">Teams</h2>
+  <p class="wb-kicker">Pick a club. See the roster.</p>
 
-<div class="mt-5 text-center">
+  <div class="wb-list">
+    <h2 class="wb-title">National Teams</h2>
     @for (team of (teams$ | async) ?? []; track team.id) {
-        <a routerLink="/teams/{{ team.id }}/players" class="hover:opacity-50"><p>{{ team.id }} - {{ team.teamName }} - {{ team.country }} <span class="inline-block w-4 h-4 align-middle ml-2" [style.background-color]="team.homePrimaryHex"></span> <span class="inline-block w-4 h-4 align-middle ml-1" [style.background-color]="team.homeSecondaryHex"></span></p></a>
+      <a class="wb-row" [routerLink]="['/teams', team.id, 'players']">
+        <p>{{ team.id }} — {{ team.teamName }} — {{ team.country }}
+          <span class="wb-swatch" [style.background-color]="team.homePrimaryHex"></span>
+          <span class="wb-swatch" [style.background-color]="team.homeSecondaryHex"></span>
+        </p>
+      </a>
+    } @empty {
+      <p class="wb-empty">No teams yet.</p>
     }
+  </div>
 </div>

@@ -1,29 +1,46 @@
-<div class="text-center">
-    <h1>{{ teamId ? 'Edit Team' : 'Create Team' }}</h1>
+<div class="wb-page wb-admin">
+  <p class="wb-admin-banner">Commissioner's office</p>
+  <h1 class="wb-title">{{ teamId ? 'Edit team' : 'Create team' }}</h1>
+
+  <form class="wb-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="teamName">Team name</label>
+      <input id="teamName" type="text" formControlName="teamName" />
+    </div>
+
+    <div>
+      <label for="country">Country</label>
+      <input id="country" type="text" formControlName="country" />
+    </div>
+
+    <div>
+      <label for="province">Province</label>
+      <input id="province" type="text" formControlName="province" />
+    </div>
+
+    <div>
+      <label for="homePrimaryHex">Home primary color</label>
+      <input id="homePrimaryHex" type="color" formControlName="homePrimaryHex" />
+    </div>
+
+    <div>
+      <label for="homeSecondaryHex">Home secondary color</label>
+      <input id="homeSecondaryHex" type="color" formControlName="homeSecondaryHex" />
+    </div>
+
+    <div>
+      <label for="awayPrimaryHex">Away primary color</label>
+      <input id="awayPrimaryHex" type="color" formControlName="awayPrimaryHex" />
+    </div>
+
+    <div>
+      <label for="awaySecondaryHex">Away secondary color</label>
+      <input id="awaySecondaryHex" type="color" formControlName="awaySecondaryHex" />
+    </div>
+
+    <div class="wb-form-actions">
+      <button type="submit" class="wb-btn" [disabled]="form.invalid">Save</button>
+      <a class="wb-btn wb-btn--danger" routerLink="/admin/teams">Cancel</a>
+    </div>
+  </form>
 </div>
-
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <label>Team name: </label>
-    <input type="text" formControlName="teamName" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
-
-    <label>Country: </label>
-    <input type="text" formControlName="country" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
-
-    <label>Province: </label>
-    <input type="text" formControlName="province" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
-
-    <label>Home Primary Color: </label>
-    <input type="color" formControlName="homePrimaryHex" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
-
-    <label>Home Secondary Color: </label>
-    <input type="color" formControlName="homeSecondaryHex" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
-
-    <label>Away Primary Color: </label>
-    <input type="color" formControlName="awayPrimaryHex" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
-
-    <label>Away Secondary Color: </label>
-    <input type="color" formControlName="awaySecondaryHex" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
-
-    <button type="submit" [disabled]="form.invalid" class="rounded px-4 py-2 bg-[#94a644] ml-6 mr-6 mt-6">Save</button>
-    <button type="button" routerLink="/admin/teams" class="rounded px-4 py-2 bg-[#a00606] text-white">Cancel</button>
-</form>

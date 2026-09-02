@@ -1,34 +1,56 @@
-<div class="text-center">
-    <h1>{{ playerId ? 'Edit Player' : 'Create Player' }}</h1>
+<div class="wb-page wb-admin">
+  <p class="wb-admin-banner">Commissioner's office</p>
+  <h1 class="wb-title">{{ playerId ? 'Edit player' : 'Create player' }}</h1>
+
+  <form class="wb-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="playerId">Player ID</label>
+      <input id="playerId" type="text" formControlName="playerId" />
+    </div>
+
+    <div>
+      <label for="firstName">First name</label>
+      <input id="firstName" type="text" formControlName="firstName" />
+    </div>
+
+    <div>
+      <label for="lastName">Last name</label>
+      <input id="lastName" type="text" formControlName="lastName" />
+    </div>
+
+    <div>
+      <label for="race">Race</label>
+      <input id="race" type="text" formControlName="race" />
+    </div>
+
+    <div>
+      <label for="subRace">Sub race</label>
+      <input id="subRace" type="text" formControlName="subRace" />
+    </div>
+
+    <div>
+      <label for="age">Age</label>
+      <input id="age" type="number" formControlName="age" />
+    </div>
+
+    <div>
+      <label for="position">Position</label>
+      <input id="position" type="text" formControlName="position" />
+    </div>
+
+    <div>
+      <label for="hobbies">Hobbies</label>
+      <input id="hobbies" type="text" formControlName="hobbies" />
+    </div>
+
+    <div>
+      <label for="shirtNumber">Shirt number</label>
+      <input id="shirtNumber" type="number" formControlName="shirtNumber" />
+    </div>
+
+    <div class="wb-form-actions">
+      <button type="submit" class="wb-btn" [disabled]="form.invalid">Save</button>
+      <a class="wb-btn wb-btn--danger" [routerLink]="['/admin/teams', teamId, 'players']">Cancel</a>
+    </div>
+  </form>
 </div>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <label>Player ID: </label>
-    <input type="text" formControlName="playerId" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
-
-    <label>First Name: </label>
-    <input type="text" formControlName="firstName" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
-
-    <label>Last Name: </label>
-    <input type="text" formControlName="lastName" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
-
-    <label>Race: </label>
-    <input type="text" formControlName="race" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
-
-    <label>Sub race: </label>
-    <input type="text" formControlName="subRace" class="bg-neutral-500 text-white rounded-md mr-7 px-4"/>
-
-    <label>Age: </label>
-    <input type="number" formControlName="age" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
-
-    <label>Position: </label>
-    <input type="text" formControlName="position" class="bg-neutral-500 text-white rounded-md mr-7 px-4" />
-
-    <label>Hobbies: </label>
-    <input type="text" formControlName="hobbies" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
-
-    <label>Shirt Number: </label>
-    <input type="number" formControlName="shirtNumber" class="bg-neutral-500 text-white rounded-md mr-7 px-4">
-
-    <button type="submit" [disabled]="form.invalid" class="rounded px-4 py-2 bg-[#94a644] ml-6 mr-6">Save</button>
-    <button type="button" [routerLink]="['/admin/teams/', teamId, '/players']" class="rounded px-4 py-2 bg-[#a00606] text-white">Cancel</button>
-</form>
