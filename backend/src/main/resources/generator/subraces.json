@@ -1,0 +1,13 @@
+{
+    "human": ["Veilwalker", "Jehionian", "Half-Elf", "Half-Orc", "Half-Draconian"],
+    "elf": ["High Elf", "Wood Elf", "Dark Elf", "Moon Elf"],
+    "dwarf": ["Hill Dwarf", "Mountain Dwarf", "Khazrondor Dwarf", "Nerbboldar Dwarf"],
+    "tiefling": ["Abyssal", "Chthonic", "Infernal"],
+    "draconian": ["Bozak", "Kapak", "Aurak"],
+    "orc": [],
+    "gnome": ["Forest Gnome", "Rock Gnome"],
+    "halfling": [],
+    "goblin": [],
+    "kobold": []
+
+}

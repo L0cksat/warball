@@ -1,0 +1,12 @@
+[
+  { "key": "human", "label": "Human" },
+  { "key": "elf", "label": "Elf" },
+  { "key": "dwarf", "label": "Dwarf" },
+  { "key": "tiefling", "label": "Tiefling" },
+  { "key": "draconian", "label": "Draconian" },
+  { "key": "orc", "label": "Orc" },
+  { "key": "gnome", "label": "Gnome" },
+  { "key": "halfling", "label": "Halfling" },
+  { "key": "goblin", "label": "Goblin" },
+  { "key": "kobold", "label": "Kobold" }
+]

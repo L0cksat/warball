@@ -1,0 +1,13 @@
+{
+    "human": ["Xander", "Hector", "Ray", "Rachel", "Rosa", "Abigail", "Lucy", "Raya", "Annabella", "Antonio", "José", "Christian", "Erika", "Candela", "Yoritaka", "Naima"],
+    "elf": ["Zeno", "Neldor", "Hagmer", "Pywaln", "Mnementh", "Faylen", "Eirina", "Axilya", "Pyria", "Neia", "Triandal", "Uevareth", "Ivasaar", "Goras", "Eletha", "Tsarra", "Talindra"],
+    "dwarf": ["Gloritdrom", "Doradraec", "Ragrock", "Nosdroul", "Orirnot", "Fovok", "Fondrigaer", "Hevana", "Sidraetain", "Arakkula", "Reikoren", "Dordraengrid"],
+    "tiefling": ["Morthian", "Zephrak", "Belthar", "Kalrion", "Aelzoth", "Falnix", "Falindra", "Kythera", "Zephyra", "Lirashai", "Kryssine", "Felarim"],
+    "draconian": ["Dakhan", "Sorrath", "Raxith", "Balasar", "Clangeddin", "Bharnathor", "Lesh", "Zessara", "Verithra", "Naelith", "Varethia", "Nevaril"],
+    "orc": [],
+    "gnome": [],
+    "halfling": [],
+    "goblin": [],
+    "kobold": [],
+    "generic": ["Danyell", "Mark", "Joan", "Isabell", "Amy"]
+}
