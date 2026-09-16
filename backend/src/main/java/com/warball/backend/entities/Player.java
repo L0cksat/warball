@@ -48,6 +48,9 @@ public class Player {
 
     @Column(name = "SUB_RACE")
     private String subRace;
+    
+    @Column(name = "SEX")
+    private String sex;
 
     @Column(name = "PLAYER_POSITION")
     private String position;

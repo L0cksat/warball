@@ -52,6 +52,7 @@ export interface Player {
   age: number;
   race: string;
   subRace: string;
+  sex: string;
   position: string;
   team?: Team;
   attributes: PlayerAttributes;

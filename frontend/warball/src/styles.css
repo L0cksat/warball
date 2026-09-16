@@ -88,6 +88,20 @@ h3 {
   text-align: center;
 }
 
+.wb-flag {
+  display: inline-block;
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: contain;
+  object-position: center;
+  vertical-align: middle;
+  border: 1px solid var(--wb-border);
+  border-radius: 2px;
+  background: rgba(5, 5, 5, 0.45);
+  box-shadow: 0 0 0 1px rgba(5, 5, 5, 0.65);
+  flex-shrink: 0;
+}
+
 .wb-kicker {
   font-family: var(--wb-font-mono);
   font-size: 0.78rem;

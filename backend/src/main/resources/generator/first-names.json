@@ -1,13 +1,46 @@
 {
-    "human": ["Xander", "Hector", "Ray", "Rachel", "Rosa", "Abigail", "Lucy", "Raya", "Annabella", "Antonio", "José", "Christian", "Erika", "Candela", "Yoritaka", "Naima"],
-    "elf": ["Zeno", "Neldor", "Hagmer", "Pywaln", "Mnementh", "Faylen", "Eirina", "Axilya", "Pyria", "Neia", "Triandal", "Uevareth", "Ivasaar", "Goras", "Eletha", "Tsarra", "Talindra"],
-    "dwarf": ["Gloritdrom", "Doradraec", "Ragrock", "Nosdroul", "Orirnot", "Fovok", "Fondrigaer", "Hevana", "Sidraetain", "Arakkula", "Reikoren", "Dordraengrid"],
-    "tiefling": ["Morthian", "Zephrak", "Belthar", "Kalrion", "Aelzoth", "Falnix", "Falindra", "Kythera", "Zephyra", "Lirashai", "Kryssine", "Felarim"],
-    "draconian": ["Dakhan", "Sorrath", "Raxith", "Balasar", "Clangeddin", "Bharnathor", "Lesh", "Zessara", "Verithra", "Naelith", "Varethia", "Nevaril"],
-    "orc": [],
-    "gnome": [],
-    "halfling": [],
-    "goblin": [],
-    "kobold": [],
-    "generic": ["Danyell", "Mark", "Joan", "Isabell", "Amy"]
+    "human": {
+        "male": ["Xander", "Hector", "Ray", "Antonio", "José", "Christian", "Yoritaka"],
+        "female": ["Rachel", "Rosa", "Abigail", "Lucy", "Raya", "Annabella", "Erika", "Candela", "Naima"]
+    },
+    "elf": {
+        "male": ["Zeno", "Neldor", "Hagmer", "Pywaln", "Mnementh", "Triandal", "Uevareth", "Ivasaar", "Goras"],
+        "female": ["Faylen", "Eirina", "Axilya", "Pyria", "Neia", "Eletha", "Tsarra", "Talindra"]
+    },
+    "dwarf": {
+        "male": ["Gloritdrom", "Doradraec", "Ragrock", "Nosdroul", "Orirnot", "Fovok"],
+        "female": ["Fondrigaer", "Hevana", "Sidraetain", "Arakkula", "Reikoren", "Dordraengrid"]
+    },
+    "tiefling": {
+        "male": ["Morthian", "Zephrak", "Belthar", "Kalrion", "Aelzoth", "Falnix"],
+        "female": ["Falindra", "Kythera", "Zephyra", "Lirashai", "Kryssine", "Felarim"]
+    },
+    "draconian": {
+        "male": ["Dakhan", "Sorrath", "Raxith", "Balasar", "Clangeddin", "Bharnathor"],
+        "female": ["Lesh", "Zessara", "Verithra", "Naelith", "Varethia", "Nevaril"]
+    },
+    "orc": {
+        "male": ["Kaldur", "Grommara", "Brakk", "Karg", "Thrak", "Hrakath"],
+        "female": ["Kargash", "Wargra", "Thukkara", "Throka", "Vornaka", "Xulda"]
+    },
+    "gnome": {
+        "male": ["Rixle", "Wizzle", "Thistlewick", "Gimbal", "Puddlefoot", "Jorbin"],
+        "female": ["Merida", "Aelina", "Arinelle", "Eli", "Pippa", "Celeste"]
+    },
+    "halfling": {
+        "male": ["Dorian", "Tully", "Tansy", "Finnian", "Corin", "Nibbler"],
+        "female": ["Pippy", "Hattie", "Dottie", "Tilly", "Nessa", "Fernie"]
+    },
+    "goblin": {
+        "male": ["Krikk", "Zoltor", "Gragnik", "Kruk", "Snaggletooth", "Grekor"],
+        "female": ["Grizzla", "Brixa", "Vikka", "Tazzia", "Farra", "Zedda"]
+    },
+    "kobold": {
+        "male": ["Zilkine", "Skirk", "Drimbak", "Hoggle", "Grizzlebar", "Veshka"],
+        "female": ["Milla", "Zilba", "Runa", "Zilna", "Pippa", "Skira"]
+    },
+    "generic": {
+        "male": ["Danyell", "Mark"],
+        "female": ["Joan", "Isabell", "Amy"]
+    }
 }

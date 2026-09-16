@@ -1,0 +1,17 @@
+.wb-team-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.7rem;
+}
+
+.wb-team-line__name {
+  font-family: var(--wb-font-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.wb-team-line .wb-swatch {
+  margin-left: 0;
+}

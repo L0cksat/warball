@@ -1,5 +1,17 @@
 <div class="wb-page">
-  <h1 class="wb-title">Players — {{ (team$ | async)?.teamName }}</h1>
+  <h1 class="wb-title">
+    @if (team$ | async; as team) {
+      <span>Players — {{ team.teamName }}</span>
+      @if (flagSrc(team.country); as flag) {
+        <img
+          class="wb-flag"
+          [src]="flag"
+          [alt]="team.country + ' flag'"
+          (error)="hideFlag(team.country)"
+        />
+      }
+    }
+  </h1>
   <p class="wb-kicker">The lineup</p>
 
   <div class="wb-list">

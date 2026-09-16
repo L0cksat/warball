@@ -105,6 +105,7 @@ export class AdminPlayerFormComponent implements OnInit{
       lastName: this.form.value.lastName!,
       race: this.form.value.race!,
       subRace: this.form.value.subRace!,
+      sex: this.loadedPlayer?.sex ?? '',
       age: this.form.value.age!,
       position: this.form.value.position!,
       team: { id: this.teamId! } as Team,

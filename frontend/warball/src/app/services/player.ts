@@ -25,6 +25,10 @@ export class PlayerService {
     return this.httpClient.post<Player>(`${this.apiUrl}/players`, payload)
   }
 
+  generatePlayer(teamId: number): Observable<Player>{
+    return this.httpClient.post<Player>(`${this.apiUrl}/teams/${teamId}/players/generate`, null)
+  }
+
   updatePlayer(id: number, player: Player): Observable<Player>{
     const { id: _ignored, ...payload } = player
     return this.httpClient.put<Player>(`${this.apiUrl}/players/${id}`, payload)

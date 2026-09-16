@@ -4,7 +4,27 @@
   @if (player$ | async; as player) {
     <article class="player-card">
       <div class="player-card__portrait">
-        <p>Future generate player image</p>
+        @let kitTeam = (teams$ | async) ?? player.team;
+        <div
+          class="player-kit"
+          [style.--kit-primary]="kitTeam?.homePrimaryHex || '#1a1a1a'"
+          [style.--kit-secondary]="kitTeam?.homeSecondaryHex || '#ffbe00'"
+        >
+          <svg class="player-kit__shape" viewBox="0 0 200 240" aria-hidden="true">
+            <path
+              class="player-kit__body"
+              d="M38 42 L68 42 L74 20 C86 34 114 34 126 20 L132 42 L162 42 L196 74 L168 92 L168 228 L32 228 L32 92 L4 74 Z"
+            />
+            <path
+              class="player-kit__collar"
+              d="M74 20 L88 52 L112 52 L126 20 C114 34 86 34 74 20 Z"
+            />
+          </svg>
+          <div class="player-kit__print">
+            <p class="player-kit__name">{{ player.lastName }}</p>
+            <p class="player-kit__number">{{ player.shirtNumber ?? '' }}</p>
+          </div>
+        </div>
       </div>
 
       <h2 class="player-card__name">{{ player.firstName }} {{ player.lastName }}</h2>
@@ -22,6 +42,7 @@
         <p>Age: {{ player.age }}</p>
         <p>Race: {{ player.race }}</p>
         <p>Subrace: {{ player.subRace }}</p>
+        <p>Sex: {{ player.sex }}</p>
         <p>Position: {{ player.position }}</p>
         <p>Shirt number: #{{ player.shirtNumber }}</p>
         <p>Team: {{ player.team?.teamName }}</p>

@@ -6,10 +6,19 @@
     <h2 class="wb-title">National Teams</h2>
     @for (team of (teams$ | async) ?? []; track team.id) {
       <a class="wb-row" [routerLink]="['/teams', team.id, 'players']">
-        <p>{{ team.id }} — {{ team.teamName }} — {{ team.country }}
+        <span class="wb-team-line">
+          <span class="wb-team-line__name">{{ team.teamName }}</span>
+          @if (flagSrc(team.country); as flag) {
+            <img
+              class="wb-flag"
+              [src]="flag"
+              [alt]="team.country + ' flag'"
+              (error)="hideFlag(team.country)"
+            />
+          }
           <span class="wb-swatch" [style.background-color]="team.homePrimaryHex"></span>
           <span class="wb-swatch" [style.background-color]="team.homeSecondaryHex"></span>
-        </p>
+        </span>
       </a>
     } @empty {
       <p class="wb-empty">No teams yet.</p>

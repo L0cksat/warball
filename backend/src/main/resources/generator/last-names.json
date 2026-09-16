@@ -1,0 +1,13 @@
+{
+    "human": ["Griffiths", "Morris", "Murphy", "Murray", "Wells", "Gallagher", "Berry", "Stevens", "Young", "Wood", "Valdés", "Burgos", "Melero", "Cedillo", "Llopis", "Namboku", "Yoshitoshi", "Raira", "Imari", "Shammas", "Khoury", "Harb", "Asfour", "Zogby","MacDowell", "O'Hannon", "Doyle", "Tiernan"],
+    "elf": ["Phigella", "Reyric", "Dorjor", "Ililen", "Holadi", "Heidove", "Venzeiros", "Valmyar", "Crafir", "Triswenys", "Zumphyra", "Ularona", "Daquinal", "Pervaris", "Elaris", "Waespetor", "Omatris"],
+    "dwarf": ["Brightdigger", "Kobolddelver", "Bouldershaper", "Boneborn", "Honormaul", "Greatfeet", "Grimdelver", "Pebblebrew", "Kragbrewer", "Barbedspine", "Grumblebender", "Flintfall"],
+    "tiefling": ["Vash'ral", "Illenth", "Vynrak", "Daelithar", "Vyrkathar", "Druthane", "Xylverash", "Ash'vylon", "Dunthil", "Ethrel", "Valethora", "Tindrath"],
+    "draconian": ["Thunderheart", "Hearthscale", "Flamebreath", "Rockscale", "Kharoth", "Kharvyn", "Kriv", "Ashrender", "Ironbark", "Arjhan", "Daardendrien", "Steelclaw"],
+    "orc": ["Stoneforge", "the Sturdy", "the Steadfast", "Bloodhammer", "the Anvil", "Ironmaw", "of the Wastes", "Firefist", "the Shrewd", "Shadowcart", "Ragged Glade", "Emberstone"],
+    "gnome": ["Copperbrew", "Ironmix", "Underbloom", "Sparkfizz", "Mardu", "Herbgrind", "Stonebright", "Duskshine", "Brightfacet", "Finespark", "Tinkersilk", "Brightgem"],
+    "halfling": ["Fiddlewhisk", "Hearthstone", "Greenhill", "Hallowvale", "Berrybright", "Glitterbriar", "Farsight", "Leafloam", "Quickstep", "Wayfinder", "Driftwood", "Woodleaf"],
+    "goblin": ["Ironclad", "Sparksoul", "The Ironhand", "Firebrand", "the Resharper", "Ironspike", "Tumblespark", "Mugbottom", "Brightpint", "the Friendly", "Greenmug", "Quickfoot"],
+    "kobold": ["Wazzywhisk", "the Swillmaster", "the Chatty", "Rednose", "the Jolly", "of the Warm Brew", "Redroot", "Sunbloom", "Farsight", "Herbwhisper", "the Green", "Leafwhisper"],
+    "generic": ["Russell", "Quintin", "Coorthopp", "Greenway", "Hamond", "Jones", "Davies"]
+}

@@ -15,21 +15,32 @@ import { Team } from '../../../models/team/team';
   styleUrl: './admin-player-list.css',
 })
 export class AdminPlayerListComponent {
-  teamId: number | null = null
-  players$!: Observable<Player[]>
-  team$!: Observable<Team>
-  
-  private playerService = inject(PlayerService)
-  private teamService = inject(TeamService)
-  private route = inject(ActivatedRoute)
+  teamId: number | null = null;
+  players$!: Observable<Player[]>;
+  team$!: Observable<Team>;
 
-  ngOnInit(): void{
-    const idParam = this.route.snapshot.paramMap.get('id')
-    if(idParam) {
-      this.teamId = +idParam
-      this.team$ = this.teamService.getTeam(this.teamId)
-      this.players$ = this.playerService.getRoster(this.teamId)
-      }
+  private playerService = inject(PlayerService);
+  private teamService = inject(TeamService);
+  private route = inject(ActivatedRoute);
+
+  ngOnInit(): void {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam) {
+      this.teamId = +idParam;
+      this.team$ = this.teamService.getTeam(this.teamId);
+      this.players$ = this.playerService.getRoster(this.teamId);
     }
   }
 
+  generateNewPlayer(): void {
+    if (this.teamId === null) {
+      return;
+    }
+    const teamId = this.teamId;
+    this.playerService.generatePlayer(teamId).subscribe({
+      next: () => {
+        this.players$ = this.playerService.getRoster(teamId);
+      },
+    });
+  }
+}

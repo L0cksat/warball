@@ -4,6 +4,7 @@
 
   <div class="wb-actions">
     <a class="wb-btn" [routerLink]="['/admin/teams', teamId, 'players', 'new']">Add new player</a>
+    <button class="wb-btn" (click)="generateNewPlayer()">Generate player</button>
     <a class="wb-btn wb-btn--ghost" routerLink="/admin/teams">Back to teams</a>
   </div>
 
