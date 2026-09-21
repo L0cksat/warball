@@ -3,168 +3,184 @@
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 
 ## Overview
 
-Project Warball is an automated, browser-based text sports simulation game. Inspired by the [Blaseball](https://www.blaseball.com) style, this project translates a fictional sport played in the fantasy setting of Earisia into a live, interactive web dashboard. The game requires no direct player input; instead, an autonomous backend engine calculates passes, tackles, and shots using dynamic mathematical models, broadcasting the results in real-time to the client.
+Project Warball is an automated, browser-based text sports simulation game. Inspired by [Blaseball](https://www.blaseball.com), it translates a fictional sport played in Earisia into a live web dashboard. Matches will eventually require no direct input: the backend will calculate passes, tackles, and shots and broadcast them to the client.
 
-Design specifications and lore are documented in `warball_documentation.md` (and related reference files such as `Warball.md` / `project_warball.md`).
+**What you can do today:** browse national teams (with flags and kit colors), open a roster, open a player card with an FM-style kit, and — from Admin Mode — create/edit teams and players or **generate** a random player from JSON catalogs.
 
-## System Architecture
+Design and lore: `warball_documentation.md`. Engineering deep-dive (every entity, method, and why): [`docs/TECHNICAL.md`](docs/TECHNICAL.md).
 
-This project uses a monorepo structure:
+![Home](docs/images/home.png)
 
-* **Frontend (`frontend/warball/`):** Angular 21 (standalone components), Tailwind CSS, and `HttpClient` for REST. Planned: Server-Sent Events (SSE) for live match feeds.
-* **Backend (`backend/`):** Java 21 and Spring Boot 3.x (executable JAR with embedded Tomcat). REST API under `/api/v1/`. Planned: `SimulationEngineService` for autonomous match ticks.
+## Current product surface
 
-### Database Strategy
+### Public
 
-* **MySQL (`warball_db`):** Persistent relational storage for teams (and later players/rosters). JPA/Hibernate with `ddl-auto=update`.
-* **MongoDB (`warball_live`):** Configured for future live match state and event logs. Not used in Day 1.
+![Teams](docs/images/teams.png)
 
-## Day 1 Progress (Current State)
+- **Home** — logo, tagline, link into the directory.
+- **Teams** — national clubs, country flags, home-kit color swatches.
+- **Roster** — shirt number, name, position.
+- **Player details** — kit SVG (team hexes + name/number), identity, hobbies, dice attributes, traits/status empty states.
 
-Day 1 established a full-stack vertical slice for **teams**: database → Spring Boot API → Angular display.
+Teams → roster:
 
-### Backend (implemented)
+![Teams to roster](docs/gifs/teams-to-roster.gif)
 
-| Layer | Details |
-|-------|---------|
-| **Entity** | `Team` — `id`, `teamName`, `country`, `province` (JPA + Lombok) |
-| **Repository** | `TeamRepository` extends `JpaRepository<Team, Long>` |
-| **Service** | `TeamService` / `TeamServiceImpl` — create and update logic |
-| **Controller** | `TeamRestController` — REST endpoints with CORS for `http://localhost:4200` |
+Roster → player card:
 
-**Teams API** (`/api/v1/teams`):
+![Roster to player details](docs/gifs/roster-to-player-details.gif)
+
+![Player kit](docs/images/player-details.png)
+
+![Player skills](docs/images/player-skills.png)
+
+### Admin (“Commissioner’s office”)
+
+![Admin teams](docs/images/admin-teams.png)
+
+- Team list, create/edit (name, country, province, four kit hexes).
+- Per-team roster with **Add player**, **Generate player**, and **Edit player**.
+- Player form edits scalars (names, race, age, position, hobbies as comma-separated text, shirt number) and **preserves** JSON attributes/traits on save.
+
+![Admin generate roster](docs/images/admin-roster.png)
+
+## System architecture
+
+Monorepo:
+
+* **Frontend (`frontend/warball/`):** Angular 21 (standalone, zoneless), Tailwind CSS v4, `HttpClient` REST. Planned: SSE for live match feeds.
+* **Backend (`backend/`):** Java 21, Spring Boot 3.x, executable JAR, REST under `/api/v1/`. Planned: `SimulationEngineService`.
+
+### Database strategy
+
+* **MySQL / MariaDB (`warball_db`, port 3307):** teams and players. JPA `ddl-auto=update`. Player attributes, traits, status effects, and hobbies are JSON columns.
+* **MongoDB (`warball_live`):** reserved for live match state. Not used yet.
+
+## API (`/api/v1`)
+
+CORS origin: `http://localhost:4200`.
+
+### Teams
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/teams` | List all teams |
-| `GET` | `/teams/{id}` | Get one team (404 if not found) |
-| `POST` | `/teams` | Create team (201 Created) |
-| `PUT` | `/teams/{id}` | Update team (200 OK / 404) |
+| `GET` | `/teams` | List teams |
+| `GET` | `/teams/{id}` | One team (404 if missing) |
+| `POST` | `/teams` | Create (201) |
+| `PUT` | `/teams/{id}` | Update (200 / 404) |
+| `GET` | `/teams/{teamId}/players` | Roster |
+| `POST` | `/teams/{teamId}/players/generate` | Procedural player (201) |
 
-Example response:
+### Players
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/players/{id}` | One player, including nested team |
+| `POST` | `/players` | Manual create (201) |
+| `PUT` | `/players/{id}` | Update scalars + JSON (200 / 404) |
+
+No DELETE endpoints. No `GET /players` (always scoped to a team).
+
+Example team:
 
 ```json
 {
   "id": 1,
-  "teamName": "GALONIAN GLADIATORS",
-  "country": "GALONIAN EMPIRE",
-  "province": null
+  "teamName": "Galonian Gladiators",
+  "country": "Galonian Empire",
+  "province": null,
+  "homePrimaryHex": "#0ca2ed",
+  "homeSecondaryHex": "#f9f5f5",
+  "awayPrimaryHex": "#050505",
+  "awaySecondaryHex": "#0bb6ef"
 }
 ```
 
-### Frontend (implemented)
+## Player generator
 
-| Feature | Details |
-|---------|---------|
-| **Shell** | `App` — global header + `<router-outlet>` |
-| **Routing** | `/` (Home), `/teams` (public team list) |
-| **Header** | Shared navigation with `routerLink` |
-| **Teams page** | Fetches from API via `TeamService`; displays teams using the `async` pipe |
-| **Styling** | Tailwind CSS v4 via PostCSS |
+`PlayerGeneratorService` loads catalogs from `backend/src/main/resources/generator/` at startup:
 
-### MySQL (Day 1 schema)
+| File | Used for |
+|------|----------|
+| `races.json` | 10 races (`key` + display `label`) |
+| `subraces.json` | Subrace labels per race key |
+| `first-names.json` | Sexed first names + `generic` fallback |
+| `last-names.json` | Surnames + `generic` fallback |
+| `hobbies.json` | Global verbs × hobbies |
+| `positions.json` | Castle Keeper, Defender, Attacker |
 
-Table `teams`:
+Each generate rolls age 18–40, a free shirt number 1–99 (unique per team), and attribute dice **0.0–3.0**. Traits are not generated yet — do not wipe the `players` table until they are.
 
-* `ID` (INT, auto-increment, PK)
-* `TEAM_NAME`
-* `COUNTRY`
-* `PROVINCE`
+## Version 1 — remaining
 
-New columns can be added by extending the `Team` entity; Hibernate `update` will alter the table without dropping existing data.
+* Trait catalogs + generate into `TRAITS` JSON
+* Empty `statusEffects` list at create (match-time later)
+* Live match feed (SSE) + MongoDB match state
+* Auth on `/admin/*` before VPS
+* Optional DELETE endpoints
 
-## Version 1 Roadmap (Planned)
-
-Features not yet built but planned for v1:
-
-* **Admin UI (Angular):** Reactive Forms to create/edit teams (and later players) via the REST API
-* **Random player generator:** Procedural names, races, stats, and traits
-* **Player rosters:** 18-player teams stored in MySQL (JSON attributes)
-* **Live match feed:** SSE streaming from Spring Boot; match state in MongoDB
-* **Team & player directories:** Public views, profiles, and history endpoints
-* **DELETE endpoints:** Optional; manual DB cleanup acceptable during development
-
-## Future Development
-
-* User accounts for community voting and input
-* Image / pixel art generation for player portraits and team emblems
-* Authentication for admin routes before VPS deployment
-
-## Local Development Setup
+## Local development
 
 ### Prerequisites
 
-* Node.js & npm (Angular)
-* Java 21 & Maven (Spring Boot)
-* MySQL Server (check port in `application.properties` — default config uses **3307**)
-* MongoDB Server (port 27017) — required later for live simulation
+* Node.js & npm
+* Java 21 & Maven
+* MariaDB/MySQL on **3307** with database `warball_db` (see `backend/src/main/resources/application.properties`). On this machine that is XAMPP MySQL (`C:\xampp\mysql`), not MySQL80 on 3306.
+* MongoDB 27017 — only required when live simulation lands
 
-### Recommended tooling
+### Backend
 
-* **VS Code** with Extension Pack for Java, Spring Boot Extension Pack, and Angular language support
-* **MySQL Workbench** (or similar) for database management
-* **Postman / Thunder Client / curl** for API testing
+```powershell
+cd backend
+.\mvnw.cmd spring-boot:run
+```
 
-### Starting the Backend
+Verify: `http://localhost:8080/api/v1/teams`
 
-1. Navigate to `backend/`.
-2. Ensure MySQL is running and `warball_db` exists.
-3. Update `src/main/resources/application.properties` with your MySQL URL, username, and password.
-4. Run the application (embedded Tomcat — no separate server install):
+### Frontend
 
-   ```bash
-   ./mvnw spring-boot:run
-   ```
+```powershell
+cd frontend/warball
+npm install
+npx ng serve
+```
 
-   Windows:
+Open `http://localhost:4200` (use **localhost**, not `127.0.0.1`, so CORS matches). If new files under `public/` 404, restart `ng serve`.
 
-   ```powershell
-   .\mvnw.cmd spring-boot:run
-   ```
+Frontend-specific notes and the same screenshots: [`frontend/warball/README.md`](frontend/warball/README.md).
 
-   Or run `BackendApplication` from VS Code / Spring Boot Dashboard.
+### Packaging
 
-5. Verify API: `http://localhost:8080/api/v1/teams`
+The backend is an **executable JAR**, not a WAR. Deploy with `java -jar`.
 
-### Starting the Frontend
-
-1. Navigate to `frontend/warball/`.
-2. Install dependencies: `npm install`
-3. Start dev server: `ng serve`
-4. Open `http://localhost:4200`
-
-### CORS
-
-The backend allows cross-origin requests from `http://localhost:4200` for local development. Use `localhost` (not `127.0.0.1`) in the browser to match the configured origin.
-
-### Packaging note
-
-The backend is packaged as an **executable JAR** (not WAR). Deployment to a VPS is done with `java -jar`, without a standalone Tomcat installation.
-
-## Project Structure (Day 1)
+## Project structure (now)
 
 ```text
 warball/
 ├── backend/
 │   └── src/main/java/com/warball/backend/
-│       ├── BackendApplication.java
-│       ├── controllers/TeamRestController.java
-│       ├── entities/Team.java
-│       ├── repositories/TeamRepository.java
-│       └── services/TeamService.java, TeamServiceImpl.java
+│       ├── controllers/     TeamRestController, PlayerRestController
+│       ├── entities/        Team, Player
+│       ├── embeddables/     attributes, Trait, StatusEffect
+│       ├── repositories/    TeamRepository, PlayerRepository
+│       └── services/        Team, Player, PlayerGeneratorService
 ├── frontend/warball/
 │   └── src/app/
-│       ├── components/   (header, home, team-list)
-│       ├── services/team.ts
-│       ├── app.routes.ts
-│       └── app.config.ts
+│       ├── components/      home, teams, roster, details, admin/*
+│       ├── models/          Team, Player
+│       ├── services/        team.ts, player.ts
+│       └── utils/           country-flags.ts
+├── docs/
+│   ├── TECHNICAL.md
+│   ├── images/
+│   └── gifs/
 └── README.md
 ```
 
 ---
+
 *Project Warball is a passion project built to merge web development architecture with deep, narrative-driven tabletop lore.*
