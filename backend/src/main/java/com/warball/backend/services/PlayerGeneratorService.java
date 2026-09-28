@@ -18,6 +18,7 @@ import com.warball.backend.embeddables.MysticalAttributes;
 import com.warball.backend.embeddables.PhysicalAttributes;
 import com.warball.backend.embeddables.PlayerAttributes;
 import com.warball.backend.embeddables.TechnicalAttributes;
+import com.warball.backend.embeddables.Trait;
 import com.warball.backend.embeddables.VibeAttributes;
 import com.warball.backend.entities.Player;
 import com.warball.backend.entities.Team;
@@ -39,6 +40,7 @@ public class PlayerGeneratorService {
     private Map<String, List<String>> lastNames;
     private Hobbies hobbyCatalog;
     private List<String> positions;
+    private List<Trait> traitCatalog;
 
 
     public PlayerGeneratorService(PlayerRepository playerRepository,
@@ -104,7 +106,7 @@ public class PlayerGeneratorService {
     }
 
     private Double roll(){
-        return random.nextInt(31) /10.0;
+        return random.nextInt(61) /10.0 - 3.0;
     }
 
     private Integer pickFreeShirtNumber(Long teamId){

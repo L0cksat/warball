@@ -1,0 +1,42 @@
+[
+    {
+        "traitId": "iron-lungs",
+        "name": "Iron Lungs",
+        "type": "blessing",
+        "modifiers": {
+            "heft": 0.5,
+            "bulwark": 0.3,
+            "slipperiness": -0.2
+        }
+    },
+    {
+        "traitId": "lightning-hands",
+        "name": "Lightning Hands",
+        "type": "blessing",
+        "modifiers": {
+            "heft": -0.2,
+            "stickyFingers": 0.3,
+            "slipperiness": 0.5
+        }
+    },
+    {
+        "traitId": "short-legs",
+        "name": "Short Legs",
+        "type": "curse",
+        "modifiers":{
+            "threading": -0.3,
+            "paranoia": 0.4,
+            "slipperiness": -0.4
+        }
+    },
+    {
+        "traitId": "clumsy", 
+        "name": "Clumsy", 
+        "type": "curse", 
+        "modifiers": {
+            "threading": -0.2, 
+            "dramaticFlair": -0.3, 
+            "stickyFingers": -0.4
+        }
+    }
+]

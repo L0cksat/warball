@@ -3,6 +3,7 @@
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)
 
 ## Overview
@@ -24,7 +25,7 @@ Design and lore: `warball_documentation.md`. Engineering deep-dive (every entity
 - **Home** — logo, tagline, link into the directory.
 - **Teams** — national clubs, country flags, home-kit color swatches.
 - **Roster** — shirt number, name, position.
-- **Player details** — kit SVG (team hexes + name/number), identity, hobbies, dice attributes, traits/status empty states.
+- **Player details** — kit SVG (team hexes + name/number), identity, hobbies, dice attributes (−3.0–3.0 on new generates), traits still empty until generate is wired.
 
 Teams → roster:
 
@@ -110,16 +111,21 @@ Example team:
 | `subraces.json` | Subrace labels per race key |
 | `first-names.json` | Sexed first names + `generic` fallback |
 | `last-names.json` | Surnames + `generic` fallback |
-| `hobbies.json` | Global verbs × hobbies |
+| `hobbies.json` | Global verbs × hobbies (flavor only) |
 | `positions.json` | Castle Keeper, Defender, Attacker |
+| `traits.json` | Blessings/curses with `traitId`, `name`, `type`, and `modifiers` |
 
-Each generate rolls age 18–40, a free shirt number 1–99 (unique per team), and attribute dice **0.0–3.0**. Traits are not generated yet — do not wipe the `players` table until they are.
+Each generate rolls age 18–40, a free shirt number 1–99 (unique per team), and attribute dice **−3.0–3.0** (`roll()`: `nextInt(61) / 10.0 - 3.0`). Every generated stat goes through that one method.
+
+Traits are **mechanical**, not flavor like hobbies: each catalog entry has a `modifiers` map (camelCase keys matching attribute fields, e.g. `heft`, `stickyFingers`). `Trait.java` already has `Map<String, Double> modifiers`. The generator field `traitCatalog` exists; **load / pick 1–2 / apply / clamp is not wired yet**, and `generateForTeam` still sets `traits` to `null`. Do not wipe the `players` table until generate applies traits and writes empty `statusEffects`.
 
 ## Version 1 — remaining
 
-* Trait catalogs + generate into `TRAITS` JSON
-* Empty `statusEffects` list at create (match-time later)
-* Live match feed (SSE) + MongoDB match state
+* Load `traits.json` in `loadCatalogs`, pick **1–2** traits per player (no duplicate `traitId` on the same player; same trait on different players is allowed)
+* Apply modifiers to rolled attributes, then clamp to **[−3.0, 3.0]**
+* Empty `statusEffects` list at create (`List.of()`, not `null`)
+* Then optional purge of old player rows
+* Live match feed (SSE) + MongoDB `warball_live`
 * Auth on `/admin/*` before VPS
 * Optional DELETE endpoints
 
