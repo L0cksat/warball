@@ -48,6 +48,16 @@
       <input id="shirtNumber" type="number" formControlName="shirtNumber" />
     </div>
 
+    <div>
+      <label for="birthplace">Birthplace</label>
+      <input id="birthplace" type="text" formControlName="birthplace" />
+    </div>
+
+    <div>
+      <label for="birthCountry">Birth nation</label>
+      <input id="birthCountry" type="text" formControlName="birthCountry" />
+    </div>
+
     <div class="wb-form-actions">
       <button type="submit" class="wb-btn" [disabled]="form.invalid">Save</button>
       <a class="wb-btn wb-btn--danger" [routerLink]="['/admin/teams', teamId, 'players']">Cancel</a>

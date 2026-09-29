@@ -31,6 +31,8 @@ export class AdminPlayerFormComponent implements OnInit{
     position: ['', Validators.required],
     hobbies: [''],
     shirtNumber: [null as number | null],
+    birthplace: [''],
+    birthCountry: [''],
   })
 
   private emptyAttributes(): PlayerAttributes{
@@ -84,6 +86,8 @@ export class AdminPlayerFormComponent implements OnInit{
             position: player.position,
             hobbies: player.hobbies?.join(', ') ?? '',
             shirtNumber: player.shirtNumber,
+            birthplace: player.birthplace ?? '',
+            birthCountry: player.birthCountry ?? '',
         })
       },
       error: () => {
@@ -117,6 +121,8 @@ export class AdminPlayerFormComponent implements OnInit{
                 .map( h => h.trim())
                 .filter(h => h.length > 0),
       shirtNumber: this.form.value.shirtNumber!,
+      birthplace: this.form.value.birthplace || null,
+      birthCountry: this.form.value.birthCountry || null,
     }
 
     if (this.playerId){

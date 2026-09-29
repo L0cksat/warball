@@ -52,6 +52,12 @@ public class Player {
     @Column(name = "SEX")
     private String sex;
 
+    @Column(name = "BIRTHPLACE")
+    private String birthplace;
+
+    @Column(name = "BIRTH_COUNTRY")
+    private String birthCountry;
+
     @Column(name = "PLAYER_POSITION")
     private String position;
 

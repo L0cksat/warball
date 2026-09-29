@@ -31,6 +31,8 @@ public class PlayerServiceImpl implements PlayerService{
           existing.setTeam(player.getTeam());
           existing.setRace(player.getRace());
           existing.setSubRace(player.getSubRace());
+          existing.setBirthplace(player.getBirthplace());
+          existing.setBirthCountry(player.getBirthCountry());
           existing.setPosition(player.getPosition());
           existing.setAttributes(player.getAttributes());
           existing.setTraits(player.getTraits());

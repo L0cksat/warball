@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { PlayerService } from '../../services/player';
 import { TeamService } from '../../services/team';
@@ -9,7 +9,7 @@ import { Team } from '../../models/team/team';
 
 @Component({
   selector: 'app-player-details',
-  imports: [AsyncPipe, RouterLink],
+  imports: [AsyncPipe, DecimalPipe, RouterLink],
   templateUrl: './player-details.html',
   styleUrl: './player-details.css',
 })

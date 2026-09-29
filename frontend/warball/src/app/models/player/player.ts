@@ -53,6 +53,8 @@ export interface Player {
   race: string;
   subRace: string;
   sex: string;
+  birthplace: string | null;
+  birthCountry: string | null;
   position: string;
   team?: Team;
   attributes: PlayerAttributes;

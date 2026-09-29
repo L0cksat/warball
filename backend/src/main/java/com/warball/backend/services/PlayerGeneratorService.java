@@ -41,6 +41,7 @@ public class PlayerGeneratorService {
     private Hobbies hobbyCatalog;
     private List<String> positions;
     private List<Trait> traitCatalog;
+    private List<BirthplaceEntry> birthplaces;
 
 
     public PlayerGeneratorService(PlayerRepository playerRepository,
@@ -89,6 +90,16 @@ public class PlayerGeneratorService {
             positions = objectMapper.readValue(in, new TypeReference<List<String>>() {});
         }
 
+        resource = new ClassPathResource("generator/traits.json");
+        try (InputStream in = resource.getInputStream()){
+            traitCatalog = objectMapper.readValue(in, new TypeReference<List<Trait>>() {});
+        }
+
+        resource = new ClassPathResource("generator/birthplaces.json");
+        try (InputStream in = resource.getInputStream()){
+            birthplaces = objectMapper.readValue(in, new TypeReference<List<BirthplaceEntry>>() {});
+        }
+
     }
 
     public record RaceEntry(String key, String label) {}
@@ -96,6 +107,8 @@ public class PlayerGeneratorService {
     public record SexedNames(List<String> male, List<String> female) {}
 
     public record Hobbies(List<String> verbs, List<String> hobbies) {}
+
+    public record BirthplaceEntry(String place, String country) {}
 
 
     private String pick(List<String> options){
@@ -130,6 +143,11 @@ public class PlayerGeneratorService {
 
     }
 
+    private double clamp(double value) {
+        double capped = Math.max(-3.0, Math.min(3.0, value)) * 10; 
+        return Math.round(capped) / 10.0;
+    }
+
     public Player generateForTeam(Long teamId){
 
        Team team = teamRepository.findById(teamId).orElseThrow();
@@ -159,13 +177,18 @@ public class PlayerGeneratorService {
         player.setLastName(lastName);
         player.setAge(18 + random.nextInt(23));
         player.setPosition(pick(positions));
+        if (birthplaces != null && !birthplaces.isEmpty()) {
+            BirthplaceEntry birth = birthplaces.get(random.nextInt(birthplaces.size()));
+            player.setBirthplace(birth.place());
+            player.setBirthCountry(birth.country());
+        }
 
         String verb = pick(hobbyCatalog.verbs());
         String hobby = pick(hobbyCatalog.hobbies());
         player.setHobbies(List.of(verb + " " + hobby));
 
         player.setShirtNumber(pickFreeShirtNumber(teamId));
-        player.setTraits(null);
+        
 
         PhysicalAttributes physical = new PhysicalAttributes();
         physical.setHeft(roll());
@@ -197,8 +220,68 @@ public class PlayerGeneratorService {
         attributes.setMysticalAttributes(mystical);
         attributes.setVibeAttributes(vibe);
 
+        List<Trait> picked = new ArrayList<>();
+        if (traitCatalog != null && !traitCatalog.isEmpty()) {
+            List<Trait> pool = new ArrayList<>(traitCatalog);
+            int count = 1 + random.nextInt(2);
+            if (count > pool.size()) {
+                count = pool.size();
+            }
+            for (int i = 0; i < count; i++){
+                int index = random.nextInt(pool.size());
+                picked.add(pool.remove(index));
+            }
+        }
+        for (Trait trait : picked ) {
+            if (trait.getModifiers() == null){
+                continue;
+            }
+            for (Map.Entry<String, Double> entry : trait.getModifiers().entrySet()){
+                String key = entry.getKey();
+                double delta = entry.getValue();
+                switch(key) {
+                    case "heft" -> physical.setHeft(physical.getHeft() + delta);
+                    case "bulwark" -> physical.setBulwark(physical.getBulwark() + delta);
+                    case "paranoia" -> physical.setParanoia(physical.getParanoia() + delta);
+                    case "slipperiness" -> physical.setSlipperiness(physical.getSlipperiness() + delta);
+                    case "stickyFingers" -> physical.setStickyFingers(physical.getStickyFingers() + delta);
+                    case "castleThirst" -> technical.setCastleThirst(technical.getCastleThirst() + delta);
+                    case "magnetism" -> technical.setMagnetism(technical.getMagnetism() + delta);
+                    case "siege" -> technical.setSiege(technical.getSiege() + delta);
+                    case "threading" -> technical.setThreading(technical.getThreading() + delta);
+                    case "trajectory" -> technical.setTrajectory(technical.getTrajectory() + delta);
+                    case "arcaneSpark" -> mystical.setArcaneSpark(mystical.getArcaneSpark() + delta);
+                    case "restraint" -> mystical.setRestraint(mystical.getRestraint() + delta);
+                    case "ward" -> mystical.setWard(mystical.getWard() + delta);
+                    case "dramaticFlair" -> vibe.setDramaticFlair(vibe.getDramaticFlair() + delta);
+                    case "moxie" -> vibe.setMoxie(vibe.getMoxie() + delta);
+                    case "trashTalk" -> vibe.setTrashTalk(vibe.getTrashTalk() + delta);
+                    default -> { }
+                }
+            }
+        }
+
+        physical.setHeft(clamp(physical.getHeft()));
+        physical.setBulwark(clamp(physical.getBulwark()));
+        physical.setParanoia(clamp(physical.getParanoia()));
+        physical.setSlipperiness(clamp(physical.getSlipperiness()));
+        physical.setStickyFingers(clamp(physical.getStickyFingers()));
+        technical.setCastleThirst(clamp(technical.getCastleThirst()));
+        technical.setMagnetism(clamp(technical.getMagnetism()));
+        technical.setSiege(clamp(technical.getSiege()));
+        technical.setThreading(clamp(technical.getThreading()));
+        technical.setTrajectory(clamp(technical.getTrajectory()));
+        mystical.setArcaneSpark(clamp(mystical.getArcaneSpark()));
+        mystical.setRestraint(clamp(mystical.getRestraint()));
+        mystical.setWard(clamp(mystical.getWard()));
+        vibe.setDramaticFlair(clamp(vibe.getDramaticFlair()));
+        vibe.setMoxie(clamp(vibe.getMoxie()));
+        vibe.setTrashTalk(clamp(vibe.getTrashTalk()));
+
+        player.setTraits(picked);
+        player.setStatusEffects(List.of());
+
         player.setAttributes(attributes);
-        player.setStatusEffects(null);
 
        return playerRepository.save(player);
        
