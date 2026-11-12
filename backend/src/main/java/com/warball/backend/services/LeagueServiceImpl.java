@@ -3,17 +3,19 @@ package com.warball.backend.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.warball.backend.entities.League;
 import com.warball.backend.repositories.LeagueRepository;
 
+@Service 
 public class LeagueServiceImpl implements LeagueService{
 
     private final LeagueRepository leagueRepo;
-    private final LeagueService leagueService;
+    
 
-    public LeagueServiceImpl(LeagueRepository leagueRepo, LeagueService leagueService){
+    public LeagueServiceImpl(LeagueRepository leagueRepo){
         this.leagueRepo = leagueRepo;
-        this.leagueService = leagueService;
     }
 
     @Override
@@ -33,7 +35,7 @@ public class LeagueServiceImpl implements LeagueService{
     }
 
     @Override
-    public List<League> findLeagueByCountry(String leagueCountry) {
-        return leagueService.findLeagueByCountry(leagueCountry);
-    } 
+    public List<League> findByLeagueCountry(String leagueCountry) {
+        return leagueRepo.findByLeagueCountry(leagueCountry);
+    }
 }

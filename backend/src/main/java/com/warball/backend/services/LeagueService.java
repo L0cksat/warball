@@ -8,5 +8,5 @@ import com.warball.backend.entities.League;
 public interface LeagueService {
     League createLeague(League league);
     Optional<League> updateLeague(Long id, League league);
-    List<League> findLeagueByCountry(String leagueCountry);
+    List<League> findByLeagueCountry(String leagueCountry); 
 }

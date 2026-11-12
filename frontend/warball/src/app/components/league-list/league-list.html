@@ -1,0 +1,26 @@
+<div class="wb-page">
+    <h2 class="wb-title">Leagues</h2>
+    <p class="wb-kicker">Here are all of the Erasia's leagues.</p>
+
+    <div class="wb-list">
+        <h2 class="wb-title">Domestic Leagues</h2>
+        @for (group of (countries$ | async) ?? []; track group.leagueCountry) {
+            <a class="wb-row" [routerLink]="['/leagues', 'country', group.leagueCountry]">
+                <span class="wb-team-line">
+                <span class="wb-team-line__name">{{ group.leagueCountry }}</span>
+                @if (flagSrc(group.leagueCountry); as flag) {
+            <img
+              class="wb-flag"
+              [src]="flag"
+              [alt]="group.leagueCountry + ' flag'"
+              (error)="hideFlag(group.leagueCountry)"
+            />
+          }
+                </span>
+            </a>
+        } @empty {
+            <p class="wb-empty">No leagues yet.</p>
+        }
+    </div>
+</div>
+
